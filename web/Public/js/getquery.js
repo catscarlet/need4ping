@@ -5,7 +5,6 @@ function GetCheckbox() {
   var value = new Array();
   for (i = 0, j = 0 ; i < checkbox.length ; i++) {
     if (checkbox[i].checked) {
-      //alert(checkbox[i].value);
       value[j] = checkbox[i].value;
       j++;
     }

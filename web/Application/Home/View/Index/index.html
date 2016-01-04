@@ -15,12 +15,14 @@
 </head>
 
 <body>
-
+  <h1>Need For Ping</h1>
   <div style="width:90%; margin:0 auto; overflow:auto; _display:inline-block;">
-    <div style="width:310px; float:left">
+    <div>
+      <div id="LOSS_container" style="min-width: 310px; height: 222px; margin: 0 auto">丢包率图表框架</div>
+      <div id="LATENCY_container" style="min-width: 310px; height: 222px; margin: 0 auto">延迟图表框架</div>
+    </div>
 
-      <h1>Need For Ping</h1>
-
+    <div>
       <form name="server_selecter" class="formcss">
         <table border="0">
           <volist name="list" id="vo">
@@ -36,19 +38,10 @@
             </tr>
           </volist>
         </table>
-        <input type="button" name="submit" value="提交查询" onclick="getquery()">
+        <input type="button" name="submit" value="Submit" onclick="getquery()">
       </form>
-      <p>GitHub地址：<a href="https://github.com/catscarlet/needforpingthinksmarty">GitHub</a></p>
-      <p>博客地址：<a href="http://blog.catscarlet.com">http://blog.catscarlet.com</a></p>
-
-    </div>
-
-    <div style=" margin-left:310px;">
-
-      <div id="LOSS_container" style="min-width: 310px; height: 400px; margin: 0 auto">丢包率图表框架</div>
-      <div id="LATENCY_container" style="min-width: 310px; height: 400px; margin: 0 auto">延迟图表框架</div>
-
-
+      <p>GitHub：<a href="https://github.com/catscarlet/">GitHub</a></p>
+      <p>WebSite：<a href="http://www.catscarlet.com">http://www.catscarlet.com</a></p>
     </div>
   </div>
 

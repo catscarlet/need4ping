@@ -14,7 +14,7 @@ function draw_LOSS() {
       x: -20
     },
     xAxis: {
-      categories: obj[0].DATETIME
+      categories: obj[0].TIME
       //categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     yAxis: {
