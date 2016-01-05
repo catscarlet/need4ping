@@ -8,8 +8,8 @@ i=0
 OUTPUT=$2
 
 function save_to_mysql() {
-  MYSQL_COMMAND="INSERT INTO $DB_PREFIX$DB_NAME.pingresult (id, server_name, DATETIME, loss_percent, rtt_min, rtt_avg, rtt_max) VALUES (NULL, \"$THESERVER\", \"$DATETIME\", \"$LOSS\", \"$min\", \"$avg\", \"$max\");"
-  echo mysql -u$DB_USER -p$DB_PWD -e "$MYSQL_COMMAND"
+  MYSQL_COMMAND="INSERT INTO $DB_PREFIX$DB_NAME.pingresult (id, server_name, TIME, loss_percent, rtt_min, rtt_avg, rtt_max) VALUES (NULL, \"$THESERVER\", \"$TIME\", \"$LOSS\", \"$min\", \"$avg\", \"$max\");"
+  mysql -u$DB_USER -p$DB_PWD -e "$MYSQL_COMMAND"
 }
 
 while read line
@@ -18,7 +18,7 @@ do
   keytext=`echo $line|awk '{print $5}'`
 
   if [ `echo $keytext|grep UNIX_TIME` ] ;then
-    DATETIME=`echo "$line" |awk '{print $7}'`
+    TIME=`echo "$line" |awk '{print $7}'`
     continue
   fi
 
