@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="Public/css/bootstrap/bootstrap.min.css">
   <script type="text/javascript" src="Public/js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="Public/js/getquery.js"></script>
-  <script type="text/javascript" src="Public/js/draw_LOSS.js"></script>
-  <script type="text/javascript" src="Public/js/draw_LATENCY.js"></script>
+  <script type="text/javascript" src="Public/js/drawLoss.js"></script>
+  <script type="text/javascript" src="Public/js/drawLatency.js"></script>
   <script type="text/javascript" src="Public/js/draw_charts.js"></script>
   <script type="text/javascript" src="Public/js/bootstrap/bootstrap.min.js"></script>
   <script type="text/javascript" src="Public/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
@@ -29,12 +29,12 @@
     <div style="background-color:#ffff99; min-width:256px;min-height:65px; float:left;">
       <div class="input-append date" id="datetimepicker1">
         开始时间：
-        <input type="text" value="2012-05-15 21:05">
+        <input type="text" id="starttime" value="2012-05-15 21:05">
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
       <div class="input-append date" id="datetimepicker2">
         结束时间：
-        <input type="text" value="2012-05-15 21:05">
+        <input type="text" id="endtime" value="2012-05-15 21:05">
         <span class="add-on"><i class="icon-th"></i></span>
       </div>
       <script type="text/javascript">
@@ -67,7 +67,7 @@
             </tr>
           </volist>
         </table>
-        <input type="button" name="submit" id="submit" value="Submit">
+        <input type="button" id="submit" value="Submit">
       </form>
     </div>
 

@@ -61,8 +61,8 @@ function stateChanged() {
   if (xmlHttp.readyState == 4 || xmlHttp.readyState == 'complete') {
 
     window.obj = eval('(' + xmlHttp.responseText + ')');
-    draw_LOSS();
-    draw_LATENCY();
+    drawLoss();
+    drawLatency();
     RefreshChart();
   }
 
