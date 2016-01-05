@@ -1,3 +1,10 @@
+$(document).ready(function() {
+  $('#submit').click(function() {
+  console.log('getquery()');
+  getquery();
+});
+});
+
 var xmlHttp;
 
 function GetCheckbox() {
