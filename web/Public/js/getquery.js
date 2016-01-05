@@ -1,8 +1,8 @@
 $(document).ready(function() {
   $('#submit').click(function() {
-  console.log('getquery()');
-  getquery();
-});
+    console.log($('#starttime').prop('value'));
+    getquery();
+  });
 });
 
 var xmlHttp;
