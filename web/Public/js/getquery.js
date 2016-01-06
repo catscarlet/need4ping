@@ -8,10 +8,10 @@ var xmlHttp;
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
-  queryRequest.starttime = 0;
-  queryRequest.endtime = 1;
+  queryRequest.starttime = $('#starttime').prop('value');
+  queryRequest.endtime = $('#endtime').prop('value');
   queryRequestJson = JSON.stringify(queryRequest);
-
+  console.log(queryRequestJson);
   var url = 'index.php/home/Querydb/Querydb';
   $.ajax({
     type: 'post',
