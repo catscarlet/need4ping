@@ -1,11 +1,12 @@
-function draw_LATENCY() {
-  $('#LATENCY_container').highcharts({
+function drawLoss() {
+  $('#LOSS_container').highcharts({
     chart: {
       type: 'spline',
-      renderTo: 'LATENCY_container'
+      renderTo: 'LOSS_container'
     },
+
     title: {
-      text: '服务器网络延迟',
+      text: '服务器网络连通率',
       x: -20 // center
     },
     subtitle: {
@@ -18,14 +19,16 @@ function draw_LATENCY() {
     },
     yAxis: {
       title: {
-        text: '延迟(ms)'
+        text: '连通率 (%)'
       },
+
       value: 0,
       width: 1,
       color: '#808080'
+
     },
     tooltip: {
-      valueSuffix: 'ms'
+      valueSuffix: '%'
     },
     legend: {
       enabled: true,
@@ -45,15 +48,26 @@ function draw_LATENCY() {
         marker: {
           enabled: false
         },
-
+        // pointInterval: 3600000, // one hour
+        // pointStart: Date.UTC(2009, 9, 6, 0, 0, 0)
       }
     },
     /*
     series: [{
-      name: obj.server_name,
-      data: obj.rtt_avg
+      //name: 'Tokyo',
+      //name: obj.server_name,
+      //data: obj.loss_percent
+      //data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+      //data: window.obj[1].loss_percent
     }
+
+                ,
+                {
+                    name: 'Bandwagon Host - Arizona',
+                    data: MyYLOSS('198.35.46.1.json')
+                }
+
 ]
-    */
+*/
   });
 };

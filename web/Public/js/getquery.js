@@ -1,3 +1,10 @@
+$(document).ready(function() {
+  $('#submit').click(function() {
+    console.log($('#starttime').prop('value'));
+    getquery();
+  });
+});
+
 var xmlHttp;
 
 function GetCheckbox() {
@@ -54,8 +61,8 @@ function stateChanged() {
   if (xmlHttp.readyState == 4 || xmlHttp.readyState == 'complete') {
 
     window.obj = eval('(' + xmlHttp.responseText + ')');
-    draw_LOSS();
-    draw_LATENCY();
+    drawLoss();
+    drawLatency();
     RefreshChart();
   }
 

@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="Public/css/bootstrap/bootstrap.min.css">
   <script type="text/javascript" src="Public/js/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="Public/js/getquery.js"></script>
-  <script type="text/javascript" src="Public/js/draw_LOSS.js"></script>
-  <script type="text/javascript" src="Public/js/draw_LATENCY.js"></script>
+  <script type="text/javascript" src="Public/js/drawLoss.js"></script>
+  <script type="text/javascript" src="Public/js/drawLatency.js"></script>
   <script type="text/javascript" src="Public/js/draw_charts.js"></script>
   <script type="text/javascript" src="Public/js/bootstrap/bootstrap.min.js"></script>
   <script type="text/javascript" src="Public/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
@@ -26,9 +26,33 @@
       <div id="LOSS_container" style="min-width: 310px; height: 222px; margin: 0 auto">丢包率图表框架</div>
       <div id="LATENCY_container" style="min-width: 310px; height: 222px; margin: 0 auto">延迟图表框架</div>
     </div>
+    <div style="background-color:#ffff99; min-width:256px;min-height:65px; float:left;">
+      <div class="input-append date" id="datetimepicker1">
+        开始时间：
+        <input type="text" id="starttime" value="2012-05-15 21:05">
+        <span class="add-on"><i class="icon-th"></i></span>
+      </div>
+      <div class="input-append date" id="datetimepicker2">
+        结束时间：
+        <input type="text" id="endtime" value="2012-05-15 21:05">
+        <span class="add-on"><i class="icon-th"></i></span>
+      </div>
+      <script type="text/javascript">
+        $('#datetimepicker1').datetimepicker({
+          'autoclose': true,
+          'pickerPosition': 'top-right'
+        });
+        $('#datetimepicker2').datetimepicker({
+          'autoclose': true,
+          'pickerPosition': 'top-right'
+        });
+      </script>
+      <p>GitHub：<a href="https://github.com/catscarlet/">GitHub</a></p>
+      <p>WebSite：<a href="http://www.catscarlet.com">http://www.catscarlet.com</a></p>
+    </div>
 
-    <div style="background-color:#ffff99; min-width:155px; float:left;">
-      <form name="server_selecter" class="formcss">
+    <div style="background-color:#EEEEEE; min-width:155px; float:left;">
+      <form name="server_selecter">
         <table border="0">
           <volist name="list" id="vo">
             <tr>
@@ -43,27 +67,13 @@
             </tr>
           </volist>
         </table>
-        <input type="button" name="submit" value="Submit" onclick="getquery()">
+        <input type="button" id="submit" value="Submit">
       </form>
     </div>
 
 
-      <div class="input-append date" id="datetimepickerDiv">
-        开始时间：
-        <input type="text" value="2012-05-15 21:05" id="datetimepicker1">
-        结束时间：
-        <input type="text" value="2012-05-15 21:05" id="datetimepicker2">
-        <span class="add-on"><i class="icon-th"></i></span>
-      </div>
-      <script type="text/javascript">
-        $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker();
-      </script>
 
 
-
-    <p>GitHub：<a href="https://github.com/catscarlet/">GitHub</a></p>
-    <p>WebSite：<a href="http://www.catscarlet.com">http://www.catscarlet.com</a></p>
   </div>
 
 </body>
