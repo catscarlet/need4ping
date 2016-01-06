@@ -8,24 +8,12 @@ class QuerydbController extends Controller
 {
     public function Querydb()
     {
-        //file_put_contents('/tmp/tmp.log', "Querydb:\n".print_r($_POST['query'], true)."\n\n", FILE_APPEND);
-        //$this->ajaxReturn($_POST);
-        //exit();
-
-
         $query_range = 360;   //最大查询范围
-
-        $query = json_decode($_POST['query'],true);
-
-
-        //exit();
-
+        $query = json_decode($_POST['query'], true);
         $serverList = $query['serverList'];
         $starttime = $query['serverList'];
         $endtime = $query['endtime'];
         file_put_contents('/tmp/tmp.log', "Querydb:\n".print_r($serverList, true)."\n\n", FILE_APPEND);
-
-
         foreach ($serverList as $id => $query) {
             $query_output[$id] = query_db($query, $query_range);
         }
