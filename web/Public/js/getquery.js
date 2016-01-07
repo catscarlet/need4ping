@@ -3,13 +3,13 @@ $(document).ready(function() {
     query();
   });});
 
-var xmlHttp;
-
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
-  queryRequest.starttime = $('#starttime').prop('value');
-  queryRequest.endtime = $('#endtime').prop('value');
+  starttime = new Date($('#starttime').prop('value'));
+  endtime = new Date($('#endtime').prop('value'));
+  queryRequest.starttime = starttime.getTime() / 1000;
+  queryRequest.endtime = endtime.getTime() / 1000;
   queryRequestJson = JSON.stringify(queryRequest);
   console.log(queryRequestJson);
   var url = 'index.php/home/Querydb/Querydb';
