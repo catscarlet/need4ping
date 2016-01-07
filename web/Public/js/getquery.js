@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+  $('#starttime').prop('value', new Date().toISOString());
+
+  $('#endtime').prop('value', new Date().toISOString());
+
+  $('#datetimepicker1').datetimepicker({
+    'autoclose': true,
+    'pickerPosition': 'top-right',
+    'format': 'yyyy-mm-dd hh:ii',
+    'todayBtn': true
+  });
+
+  $('#datetimepicker2').datetimepicker({
+    'autoclose': true,
+    'pickerPosition': 'top-right',
+    'format': 'yyyy-mm-dd hh:ii',
+    'todayBtn': true
+  });
+
   $('#submit').click(function() {
     query();
   });});
@@ -6,10 +25,15 @@ $(document).ready(function() {
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
-  starttime = new Date($('#starttime').prop('value'));
-  endtime = new Date($('#endtime').prop('value'));
-  queryRequest.starttime = starttime.getTime() / 1000;
-  queryRequest.endtime = endtime.getTime() / 1000;
+  starttime = Date.parse($('#starttime').prop('value'));
+
+  endtime = Date.parse($('#endtime').prop('value'));
+
+  console.log(starttime);
+  console.log(endtime);
+
+  queryRequest.starttime = starttime / 1000;
+  queryRequest.endtime = endtime / 1000;
   queryRequestJson = JSON.stringify(queryRequest);
   console.log(queryRequestJson);
   var url = 'index.php/home/Querydb/Querydb';
