@@ -1,10 +1,17 @@
 function drawLoss() {
+  timeAxis = new Date(obj[0].TIME);
+
+  $.each(obj[0].TIME,function(index, value) {
+    timeAxis[index] = new Date();
+    timeAxis[index].setTime(value * 1000);
+    timeAxis[index] = timeAxis[index].toLocaleString();
+  });
+
   $('#LOSS_container').highcharts({
     chart: {
       type: 'spline',
       renderTo: 'LOSS_container'
     },
-
     title: {
       text: '服务器网络连通率',
       x: -20 // center
@@ -14,7 +21,7 @@ function drawLoss() {
       x: -20
     },
     xAxis: {
-      categories: obj[0].TIME
+      categories: timeAxis
       //categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     yAxis: {
