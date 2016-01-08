@@ -5,6 +5,14 @@ $(document).ready(function() {
   $('#starttime').prop('value', starttime.getFullYear() + '-' + (starttime.getMonth() + 1) + '-' + starttime.getDate() + ' ' + starttime.getHours() + ':' + starttime.getMinutes());
   $('#endtime').prop('value', endtime.getFullYear() + '-' + (endtime.getMonth() + 1) + '-' + endtime.getDate() + ' ' + endtime.getHours() + ':' + endtime.getMinutes());
 
+  $('#query_range_checkbox').click(function() {
+    if ($(this).prop('checked')) {
+      $('.query_range_input').removeAttr('disabled');
+    } else {
+      $('.query_range_input').attr('disabled','disabled');
+    }
+  });
+
   $('#datetimepicker1').datetimepicker({
     'autoclose': true,
     'pickerPosition': 'top-right',
@@ -21,7 +29,8 @@ $(document).ready(function() {
 
   $('#submit').click(function() {
     query();
-  });});
+  });
+});
 
 function query() {
   var queryRequest = new Object();
