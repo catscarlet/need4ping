@@ -28,7 +28,8 @@ function drawLoss() {
       title: {
         text: '连通率 (%)'
       },
-
+      min: 0,
+      max: 100,
       value: 0,
       width: 1,
       color: '#808080'
