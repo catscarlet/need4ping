@@ -10,26 +10,27 @@ class QuerydbController extends Controller
     {
         $query_range = 360;   //最大查询范围
         $query = json_decode($_POST['query'], true);
+        file_put_contents('/tmp/tmp.log', "Querydb:\n".print_r($query, true)."\n\n", FILE_APPEND);
         $serverList = $query['serverList'];
-        $starttime = $query['starttime'];
-        $endtime = $query['endtime'];
-        file_put_contents('/tmp/tmp.log', "Querydb:\n".print_r($serverList, true)."\n\n", FILE_APPEND);
+        $starttime = strtotime($query['starttime']);
+        $endtime = strtotime($query['endtime']);
         foreach ($serverList as $id => $query) {
-            $query_output[$id] = query_db($query, $query_range);
+            //$query_output[$id] = query_db($query, $query_range);
+            $query_output[$id] = query_db($query, $query_range, $starttime, $endtime);
         }
+        file_put_contents('/tmp/tmp.log', "query_output:\n".print_r($query_output, true)."\n\n", FILE_APPEND);
         $this->ajaxReturn($query_output);
     }
 }
 
-        function query_db($q, $query_range,$starttime = null ,$endtime =null)
+        function query_db($q, $query_range, $starttime = null, $endtime = null)
         {
             $pingresult = M('pingresult');
             if ($starttime and $endtime) {
-              $sql_array = $pingresult->where('server_name = "'.$q.'" and TIME between '.$starttime.' and '.$endtime)->order('TIME DESC')->limit($query_range)->select();
+                $sql_array = $pingresult->where('server_name = "'.$q.'" and TIME between '.$starttime.' and '.$endtime)->order('TIME DESC')->limit($query_range)->select();
             } else {
-              $sql_array = $pingresult->where('server_name = "'.$q.'"')->order('TIME DESC')->limit($query_range)->select();
+                $sql_array = $pingresult->where('server_name = "'.$q.'"')->order('TIME DESC')->limit($query_range)->select();
             }
-
 
             $sql_count = count($sql_array);
             $i = min($query_range, $sql_count);

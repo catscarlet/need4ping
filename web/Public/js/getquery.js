@@ -1,8 +1,9 @@
 $(document).ready(function() {
-
-  $('#starttime').prop('value', new Date().toISOString());
-
-  $('#endtime').prop('value', new Date().toISOString());
+  starttime = new Date();
+  endtime = new Date();
+  starttime.setHours(starttime.getHours() - 2);
+  $('#starttime').prop('value', starttime.getFullYear() + '-' + (starttime.getMonth() + 1) + '-' + starttime.getDate() + ' ' + starttime.getHours() + ':' + starttime.getMinutes());
+  $('#endtime').prop('value', endtime.getFullYear() + '-' + (endtime.getMonth() + 1) + '-' + endtime.getDate() + ' ' + endtime.getHours() + ':' + endtime.getMinutes());
 
   $('#datetimepicker1').datetimepicker({
     'autoclose': true,
@@ -25,15 +26,15 @@ $(document).ready(function() {
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
-  starttime = Date.parse($('#starttime').prop('value'));
+  starttime = $('#starttime').prop('value');
 
-  endtime = Date.parse($('#endtime').prop('value'));
+  endtime = $('#endtime').prop('value');
 
   console.log(starttime);
   console.log(endtime);
 
-  queryRequest.starttime = starttime / 1000;
-  queryRequest.endtime = endtime / 1000;
+  queryRequest.starttime = starttime;
+  queryRequest.endtime = endtime;
   queryRequestJson = JSON.stringify(queryRequest);
   console.log(queryRequestJson);
   var url = 'index.php/home/Querydb/Querydb';
@@ -44,10 +45,14 @@ function query() {
     data: {query: queryRequestJson},
     success: function(msg) {
       console.log(msg);
-      window.obj = msg;
-      drawLoss();
-      drawLatency();
-      RefreshChart();
+      if (msg[0].TIME) {
+        window.obj = msg;
+        drawLoss();
+        drawLatency();
+        RefreshChart();
+      } else {
+        console.log('No result avaliable');
+      }
     }
   });
 }
