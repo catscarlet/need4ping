@@ -60,6 +60,7 @@ function query() {
         drawLatency();
         RefreshChart();
       } else {
+        alert('No result avaliable');
         console.log('No result avaliable');
       }
     }
