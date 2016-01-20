@@ -6,7 +6,7 @@ $(document).ready(function() {
   $('#endtime').prop('value', endtime.getFullYear() + '-' + (endtime.getMonth() + 1) + '-' + endtime.getDate() + ' ' + endtime.getHours() + ':' + endtime.getMinutes());
 
   $('#query_range_checkbox').click(function() {
-    if ($(this).prop('checked')) {
+    if ($('#query_range_checkbox').prop('checked')) {
       $('.query_range_input').removeAttr('disabled');
     } else {
       $('.query_range_input').attr('disabled','disabled');
@@ -35,9 +35,15 @@ $(document).ready(function() {
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
-  starttime = $('#starttime').prop('value');
-
-  endtime = $('#endtime').prop('value');
+  queryTimeRange = $('#query_range_checkbox').prop('checked');
+  if (queryTimeRange) {
+    starttime = $('#starttime').prop('value');
+    endtime = $('#endtime').prop('value');
+  } else {
+    starttime = new Date();
+    endtime = new Date();
+    starttime.setHours(starttime.getHours() - 2);
+  }
 
   console.log(starttime);
   console.log(endtime);
