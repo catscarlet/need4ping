@@ -1,7 +1,7 @@
 #!/bin/bash
 needforping_DIR=/var/www/need4ping/
 
-needforping_Shell_DIR=$needforping_DIR/web/Public/shell/
+needforping_Shell_DIR=$needforping_DIR/web/Public/shell
 . $needforping_Shell_DIR/needforping.conf
 TMP_DIR=$needforping_Shell_DIR/pingresult
 
