@@ -17,14 +17,18 @@ $(document).ready(function() {
     'autoclose': true,
     'pickerPosition': 'top-right',
     'format': 'yyyy-mm-dd hh:ii',
-    'todayBtn': true
+    'todayBtn': true,
+    'todayHighlight': true,
+    'minuteStep': 2
   });
 
   $('#datetimepicker2').datetimepicker({
     'autoclose': true,
     'pickerPosition': 'top-right',
     'format': 'yyyy-mm-dd hh:ii',
-    'todayBtn': true
+    'todayBtn': true,
+    'todayHighlight': true,
+    'minuteStep': 2
   });
 
   $('#submit').click(function() {
