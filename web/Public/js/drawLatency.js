@@ -13,7 +13,7 @@ function drawLatency() {
       x: -20
     },
     xAxis: {
-      categories: timeAxis
+      categories: timeAxisLocaleString
     },
     yAxis: {
       title: {

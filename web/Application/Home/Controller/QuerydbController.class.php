@@ -35,22 +35,29 @@ class QuerydbController extends Controller
             $query_DATA['TIME'][$i] = $row['TIME'];
             $query_DATA['loss_percent'][$i] = 100 - substr($row['loss_percent'], 0, -1);
             $query_DATA['rtt_avg'][$i] = round($row['rtt_avg']);
+
+            $timeAxis = (string) $row['TIME'];
+            $result[$timeAxis]['loss_percent'] = 100 - substr($row['loss_percent'], 0, -1);
+            $result[$timeAxis]['rtt_avg'] = round($row['rtt_avg']);
         }
+
+        //file_put_contents('/tmp/tmp.log', "$result:\n".print_r($result, true)."\n\n", FILE_APPEND);
 
         $pinglist = M('pinglist');
         $data = $pinglist->where('server_name = '."\"$q\"")->select();
         $pinglist_alias = $data[0]['alias_name'];
-
-         /* 因为sql查询是DESC的，所以要根据键值重新排序，不然坐标轴的时间会变成降序 */
-            ksort($query_DATA['TIME']);
+/*
+        ksort($query_DATA['TIME']);
         ksort($query_DATA['loss_percent']);
         ksort($query_DATA['rtt_avg']);
+*/
 
-         /* 将查询的关键词与查询结果合并*/
-            $query_data = array('server_name' => $q);
-        $query_data_alias = array('alias_name' => $pinglist_alias);
-        $query_data = array_merge($query_data, $query_data_alias, $query_DATA);
+        $query_result['server_name'] = $q;
+        $query_result['alias_name'] = $pinglist_alias;
+        $query_result['query_data'] = $result;
 
-        return $query_data;
+        file_put_contents('/tmp/tmp.log', "$query_data:\n".print_r($query_data, true)."\n\n", FILE_APPEND);
+
+        return $query_result;
     }
 }
