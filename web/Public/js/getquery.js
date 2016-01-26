@@ -39,6 +39,7 @@ $(document).ready(function() {
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
+
   queryTimeRange = $('#query_range_checkbox').prop('checked');
   if (queryTimeRange) {
     starttime = $('#starttime').prop('value');
@@ -54,8 +55,10 @@ function query() {
 
   queryRequest.starttime = starttime;
   queryRequest.endtime = endtime;
+
   queryRequestJson = JSON.stringify(queryRequest);
   console.log(queryRequestJson);
+
   var url = 'index.php/home/Querydb/Querydb';
   $.ajax({
     type: 'post',
@@ -66,6 +69,7 @@ function query() {
       console.log(msg);
       if (msg[0].TIME) {
         window.obj = msg;
+        timeAxisAdjust();
         drawLoss();
         drawLatency();
         RefreshChart();
@@ -77,6 +81,35 @@ function query() {
   });
 }
 
+function timeAxisAdjust() {
+  //timeAxisOrigin = new Date(obj[0].TIME);
+  timeAxisStart = Date.parse(starttime) / 120000 * 120000;
+  timeAxisEnd = Date.parse(endtime) / 120000 * 120000;
+  var x = 0;
+  timeAxis = new Object();
+  timeAxisLocaleString = new Object();
+  for (timeAxis[0] = timeAxisStart; timeAxis[x] < timeAxisEnd;) {
+    x++;
+    timeAxis[x] = timeAxis[x - 1] + 120000;
+    timeAxisLocaleString[x] = Date(timeAxis[x]).toLocaleString();
+  }
+  //console.log(timeAxisLocaleString);
+
+  $.each(obj,function(i, queryData) {
+
+    $.each(timeAxis,function(x, timeAxisI) {
+
+      $.each(queryData.TIME,function(xt, eachQueryData) {
+        console.log(eachQueryData);
+        if (eachQueryData == timeAxisI) {
+          console.log(x + ':' + timeAxisI);
+        }
+      });
+
+    });
+  });
+
+}
 function getServerList() {
   var serverList = new Array() ;
   $('.serverList').each(function(index, element) {
