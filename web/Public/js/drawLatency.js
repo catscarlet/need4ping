@@ -1,12 +1,4 @@
 function drawLatency() {
-  timeAxis = new Date(obj[0].TIME);
-
-  $.each(obj[0].TIME,function(index, value) {
-    timeAxis[index] = new Date();
-    timeAxis[index].setTime(value * 1000);
-    timeAxis[index] = timeAxis[index].toLocaleString();
-  });
-
   $('#LATENCY_container').highcharts({
     chart: {
       type: 'spline',
@@ -21,8 +13,7 @@ function drawLatency() {
       x: -20
     },
     xAxis: {
-      categories: timeAxis
-      //categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      categories: timeAxisLocaleString
     },
     yAxis: {
       title: {
@@ -52,16 +43,8 @@ function drawLatency() {
         },
         marker: {
           enabled: false
-        },
-
+        }
       }
-    },
-    /*
-    series: [{
-      name: obj.server_name,
-      data: obj.rtt_avg
     }
-]
-    */
   });
 };

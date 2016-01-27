@@ -39,6 +39,7 @@ $(document).ready(function() {
 function query() {
   var queryRequest = new Object();
   queryRequest.serverList = getServerList();
+
   queryTimeRange = $('#query_range_checkbox').prop('checked');
   if (queryTimeRange) {
     starttime = $('#starttime').prop('value');
@@ -54,17 +55,22 @@ function query() {
 
   queryRequest.starttime = starttime;
   queryRequest.endtime = endtime;
+
   queryRequestJson = JSON.stringify(queryRequest);
   console.log(queryRequestJson);
+
   var url = 'index.php/home/Querydb/Querydb';
   $.ajax({
     type: 'post',
     url: url,
     dataType: 'json',
-    data: {query: queryRequestJson},
+    data: {
+      query: queryRequestJson
+    },
     success: function(msg) {
       console.log(msg);
-      if (msg[0].TIME) {
+      timeAxisAdjust(msg);
+      if (true) {
         window.obj = msg;
         drawLoss();
         drawLatency();
@@ -77,6 +83,39 @@ function query() {
   });
 }
 
+function timeAxisAdjust(msg) {
+  console.log(Date.parse(starttime));
+  console.log(Date.parse(endtime));
+  timeAxisStart = Math.floor(Date.parse(starttime) / 1000 / 120) * 120 * 1000;
+
+  timeAxisEnd = Math.floor(Date.parse(endtime) / 1000 / 120) * 120 * 1000;
+
+  console.log(timeAxisStart);
+  console.log(timeAxisEnd);
+  var x = 0;
+  timeAxis = new Object();
+  timeAxisLocaleString = new Object();
+  for (timeAxis[0] = timeAxisStart; timeAxis[x] < timeAxisEnd;) {
+    x++;
+    timeAxis[x] = timeAxis[x - 1] + 120000;
+    timeAxisLocaleString[x] = Date(timeAxis[x]).toLocaleString();
+  }
+  console.log(timeAxisLocaleString);
+
+  $.each(timeAxis,function(x, timeAxisX) {
+    $.each(msg,function(timeIndex, queryResult) {
+      //console.log(queryResult.query_data);
+      //console.log(timeAxisX + ':' + queryResult.query_data[timeAxisX]);
+      if (queryResult.query_data[timeAxisX]) {
+
+      }
+    });
+
+
+
+  });
+
+}
 function getServerList() {
   var serverList = new Array() ;
   $('.serverList').each(function(index, element) {

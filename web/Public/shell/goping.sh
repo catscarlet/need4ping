@@ -1,5 +1,5 @@
 #!/bin/bash
-needforping_DIR=/var/www/need4ping/
+needforping_DIR=/var/www/need4ping
 
 needforping_Shell_DIR=$needforping_DIR/web/Public/shell
 . /$needforping_Shell_DIR/needforping.conf
@@ -18,6 +18,6 @@ OUTPUTFORJS=$TMP_DIR/$line.json
   DATETIME_UNIX=`date -d "$DATETIME" +%s`
   echo "DATETIME is $DATETIME, UNIX_TIME is $DATETIME_UNIX" >> $OUTPUTTXT
 
-  ping -c $PINGCOUNT $line |tail -n 3 >> $OUTPUTTXT
+  ping -c $PINGCOUNT $line -W 1|tail -n 3 >> $OUTPUTTXT
 
   $needforping_Shell_DIR/readline.sh $OUTPUTTXT $OUTPUTTMP
