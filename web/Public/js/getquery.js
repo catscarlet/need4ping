@@ -1,3 +1,5 @@
+var timeAxisAdjust;
+
 $(document).ready(function() {
   starttime = new Date();
   endtime = new Date();
@@ -50,14 +52,14 @@ function query() {
     starttime.setHours(starttime.getHours() - 2);
   }
 
-  console.log(starttime);
-  console.log(endtime);
+  //console.log(starttime);
+  //console.log(endtime);
 
   queryRequest.starttime = starttime;
   queryRequest.endtime = endtime;
 
   queryRequestJson = JSON.stringify(queryRequest);
-  console.log(queryRequestJson);
+  //console.log(queryRequestJson);
 
   var url = 'index.php/home/Querydb/Querydb';
   $.ajax({
@@ -87,9 +89,7 @@ function timeAxisAdjust(msg) {
   console.log(Date.parse(starttime));
   console.log(Date.parse(endtime));
   timeAxisStart = Math.floor(Date.parse(starttime) / 1000 / 120) * 120 * 1000;
-
   timeAxisEnd = Math.floor(Date.parse(endtime) / 1000 / 120) * 120 * 1000;
-
   console.log(timeAxisStart);
   console.log(timeAxisEnd);
   var x = 0;
@@ -98,7 +98,8 @@ function timeAxisAdjust(msg) {
   for (timeAxis[0] = timeAxisStart; timeAxis[x] < timeAxisEnd;) {
     x++;
     timeAxis[x] = timeAxis[x - 1] + 120000;
-    timeAxisLocaleString[x] = Date(timeAxis[x]).toLocaleString();
+    console.log(timeAxis[x]);
+    timeAxisLocaleString[x] = new Date(timeAxis[x]).toLocaleString();
   }
   console.log(timeAxisLocaleString);
 
